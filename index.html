@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="nl-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BelCleaning — Website in opbouw</title>
+<meta name="description" content="BelCleaning: professionele buitenreiniging. Ramen, daken, gevels en terrassen. Onze nieuwe website is binnenkort online.">
+<meta name="theme-color" content="#0b3a6e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4C22 18 12 28 12 40a20 20 0 0 0 40 0C52 28 42 18 32 4z' fill='%2338bdf8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #072a52;
+    --blue: #0b3a6e;
+    --sky: #38bdf8;
+    --aqua: #7dd3fc;
+    --white: #f8fbff;
+    --muted: #b9d4ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--deep); }
+  body {
+    font-family: "Outfit", system-ui, sans-serif;
+    color: var(--white);
+    background: radial-gradient(1200px 700px at 80% -10%, #1e6fb8 0%, transparent 60%),
+                linear-gradient(180deg, var(--blue) 0%, var(--deep) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Floating soap bubbles */
+  .bubbles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .bubble {
+    position: absolute; bottom: -80px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.75), rgba(125,211,252,.18) 40%, rgba(255,255,255,.05) 70%);
+    border: 1px solid rgba(255,255,255,.35);
+    animation: rise linear infinite;
+  }
+  @keyframes rise {
+    0%   { transform: translate(0, 0) scale(.8); opacity: 0; }
+    10%  { opacity: .9; }
+    50%  { transform: translate(30px, -55vh) scale(1); }
+    100% { transform: translate(-20px, -115vh) scale(1.1); opacity: 0; }
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 48px;
+    max-width: 1180px; margin: 0 auto; padding: 48px 32px;
+  }
+
+  .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.6rem; letter-spacing: .5px; }
+  .logo svg { width: 40px; height: 40px; filter: drop-shadow(0 0 12px rgba(56,189,248,.6)); }
+  .logo span { color: var(--sky); }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 40px; padding: 8px 16px; border-radius: 999px;
+    background: rgba(56,189,248,.12); border: 1px solid rgba(56,189,248,.4);
+    color: var(--aqua); font-size: .9rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--sky); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(56,189,248,.7); } 50% { box-shadow: 0 0 0 8px rgba(56,189,248,0); } }
+
+  h1 {
+    margin-top: 20px;
+    font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.05; font-weight: 800;
+  }
+  h1 .shine {
+    white-space: nowrap;
+    background: linear-gradient(100deg, var(--sky) 20%, #ffffff 45%, var(--sky) 70%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shine 4s linear infinite;
+  }
+  @keyframes shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+
+  p.lead { margin-top: 20px; font-size: 1.15rem; line-height: 1.65; color: var(--muted); font-weight: 300; max-width: 520px; }
+
+  .progress { margin-top: 32px; max-width: 420px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
+  .bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,.1); overflow: hidden; }
+  .bar b {
+    display: block; height: 100%; width: 78%; border-radius: inherit;
+    background: linear-gradient(90deg, var(--sky), #a5f3fc, var(--sky)); background-size: 200% 100%;
+    animation: fill 2.4s cubic-bezier(.2,.8,.2,1) both, flow 2s linear infinite;
+  }
+  @keyframes fill { from { width: 0; } }
+  @keyframes flow { to { background-position: -200% 0; } }
+
+  .services { margin-top: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 520px; }
+  .service {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px;
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(6px); font-weight: 600;
+    opacity: 0; transform: translateY(14px); animation: up .7s ease forwards;
+  }
+  .service:nth-child(1) { animation-delay: .3s; }
+  .service:nth-child(2) { animation-delay: .45s; }
+  .service:nth-child(3) { animation-delay: .6s; }
+  .service:nth-child(4) { animation-delay: .75s; }
+  @keyframes up { to { opacity: 1; transform: none; } }
+  .service svg { flex: none; width: 28px; height: 28px; color: var(--sky); }
+
+  footer { margin-top: 44px; font-size: .9rem; color: var(--muted); }
+  footer a { color: var(--aqua); text-decoration: none; }
+
+  /* Scene */
+  .scene { width: 100%; max-width: 520px; justify-self: center; }
+  .scene svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+  .squeegee { animation: wipe 5s ease-in-out infinite; }
+  @keyframes wipe {
+    0%   { transform: translate(0, 0); }
+    45%  { transform: translate(0, 118px); }
+    50%  { transform: translate(0, 118px); }
+    95%  { transform: translate(0, 0); }
+    100% { transform: translate(0, 0); }
+  }
+  .clean-reveal { animation: reveal 5s ease-in-out infinite; }
+  @keyframes reveal {
+    0%   { height: 0; }
+    45%  { height: 118px; }
+    80%  { height: 118px; }
+    95%  { height: 0; }
+    100% { height: 0; }
+  }
+  .glint { animation: glint 3.5s ease-in-out infinite; }
+  .glint.d2 { animation-delay: 1.2s; }
+  .glint.d3 { animation-delay: 2.3s; }
+  @keyframes glint { 0%,100% { opacity: 0; transform: scale(.4); } 50% { opacity: 1; transform: scale(1); } }
+  .glint { transform-box: fill-box; transform-origin: center; }
+
+  .drop { animation: drip 2.2s ease-in infinite; }
+  .drop.d2 { animation-delay: .7s; }
+  .drop.d3 { animation-delay: 1.4s; }
+  @keyframes drip { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(70px); opacity: 0; } }
+
+  .spray { animation: spray .9s ease-out infinite; transform-box: fill-box; transform-origin: left center; }
+  .spray.d2 { animation-delay: .3s; }
+  .spray.d3 { animation-delay: .6s; }
+  @keyframes spray { 0% { opacity: 0; transform: scaleX(.2); } 40% { opacity: .9; } 100% { opacity: 0; transform: scaleX(1); } }
+
+  .cloud { animation: drift 30s linear infinite; }
+  .cloud.c2 { animation-duration: 45s; animation-delay: -15s; }
+  @keyframes drift { from { transform: translateX(-140px); } to { transform: translateX(620px); } }
+
+  @media (max-width: 900px) {
+    .wrap { grid-template-columns: 1fr; gap: 24px; padding: 32px 16px; text-align: center; }
+    .scene { order: -1; max-width: 360px; }
+    .text { display: flex; flex-direction: column; align-items: center; }
+    .badge { margin-top: 24px; }
+    .progress { width: 100%; }
+    .services { width: 100%; text-align: left; }
+  }
+  @media (max-width: 420px) { .services { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } .service { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+  <div class="bubbles" id="bubbles" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <section class="text">
+      <div class="logo">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 4C22 18 12 28 12 40a20 20 0 0 0 40 0C52 28 42 18 32 4z" fill="#38bdf8"/>
+          <path d="M22 40a10 10 0 0 0 10 10" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>
+        </svg>
+        <div>Bel<span>Cleaning</span></div>
+      </div>
+
+      <div class="badge"><i></i> Website in opbouw</div>
+
+      <h1>We poetsen onze<br>website <span class="shine">blinkend op</span></h1>
+
+      <p class="lead">
+        Net zoals uw ramen en gevels verdient ook onze website een grondige beurt.
+        Binnenkort vindt u hier alles over onze professionele buitenreiniging.
+      </p>
+
+      <div class="progress" aria-label="Voortgang">
+        <div class="progress-label"><span>Bijna klaar…</span><span>Binnenkort online</span></div>
+        <div class="bar"><b></b></div>
+      </div>
+
+      <div class="services">
+        <div class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M12 3v18M4 12h16"/></svg>
+          Ramen wassen
+        </div>
+        <div class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 12 4l10 8"/><path d="M5 10v10h14V10"/><path d="M15 6V3h3v5.5"/></svg>
+          Dakreiniging
+        </div>
+        <div class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/></svg>
+          Gevelreiniging
+        </div>
+        <div class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20 7 8h10l4 12z"/><path d="M5 14h14M10 8l-1.5 12M14 8l1.5 12"/></svg>
+          Terras &amp; oprit
+        </div>
+      </div>
+
+      <footer>&copy; <span id="year">2026</span> BelCleaning &middot; <a href="https://belcleaning.be">belcleaning.be</a></footer>
+    </section>
+
+    <section class="scene" aria-hidden="true">
+      <svg viewBox="0 0 520 520">
+        <defs>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#bae6fd"/>
+            <stop offset="1" stop-color="#38bdf8"/>
+          </linearGradient>
+          <linearGradient id="dirty" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8a9bab"/>
+            <stop offset="1" stop-color="#6b7c8c"/>
+          </linearGradient>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f1f5f9"/>
+            <stop offset="1" stop-color="#cbd5e1"/>
+          </linearGradient>
+          <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1e3a5f"/>
+            <stop offset="1" stop-color="#14304f"/>
+          </linearGradient>
+          <clipPath id="bigWin"><rect x="150" y="226" width="96" height="118" rx="4"/></clipPath>
+        </defs>
+
+        <!-- sun glow + clouds -->
+        <circle cx="420" cy="90" r="46" fill="#fde68a" opacity=".9"/>
+        <circle cx="420" cy="90" r="80" fill="#fde68a" opacity=".12"/>
+        <g class="cloud" opacity=".85">
+          <ellipse cx="60" cy="70" rx="44" ry="16" fill="#fff"/>
+          <ellipse cx="88" cy="60" rx="30" ry="18" fill="#fff"/>
+        </g>
+        <g class="cloud c2" opacity=".6">
+          <ellipse cx="40" cy="140" rx="34" ry="12" fill="#fff"/>
+          <ellipse cx="62" cy="132" rx="22" ry="13" fill="#fff"/>
+        </g>
+
+        <!-- house -->
+        <polygon points="90,190 260,80 430,190" fill="url(#roof)"/>
+        <g stroke="#2b5079" stroke-width="2" opacity=".7">
+          <line x1="130" y1="165" x2="390" y2="165"/>
+          <line x1="170" y1="140" x2="350" y2="140"/>
+          <line x1="210" y1="115" x2="310" y2="115"/>
+        </g>
+        <rect x="340" y="98" width="30" height="58" fill="#94a3b8"/>
+        <rect x="335" y="92" width="40" height="10" fill="#64748b"/>
+        <rect x="110" y="190" width="300" height="230" fill="url(#wall)"/>
+        <!-- brick hint -->
+        <g stroke="#cbd5e1" stroke-width="1.2">
+          <line x1="110" y1="370" x2="410" y2="370"/>
+          <line x1="110" y1="395" x2="410" y2="395"/>
+        </g>
+
+        <!-- big window: dirty, then cleaned by squeegee -->
+        <rect x="144" y="220" width="108" height="130" rx="6" fill="#0f2f55"/>
+        <rect x="150" y="226" width="96" height="118" rx="4" fill="url(#dirty)"/>
+        <g clip-path="url(#bigWin)" opacity=".5">
+          <circle cx="170" cy="250" r="6" fill="#5b6b7a"/>
+          <circle cx="215" cy="300" r="9" fill="#5b6b7a"/>
+          <circle cx="190" cy="330" r="5" fill="#5b6b7a"/>
+          <circle cx="232" cy="245" r="4" fill="#5b6b7a"/>
+        </g>
+        <g clip-path="url(#bigWin)">
+          <rect class="clean-reveal" x="150" y="226" width="96" height="0" fill="url(#glass)"/>
+        </g>
+        <line x1="198" y1="226" x2="198" y2="344" stroke="#0f2f55" stroke-width="4"/>
+        <line x1="150" y1="285" x2="246" y2="285" stroke="#0f2f55" stroke-width="4"/>
+
+        <!-- squeegee -->
+        <g class="squeegee">
+          <rect x="146" y="222" width="104" height="8" rx="3" fill="#0ea5e9"/>
+          <rect x="146" y="228" width="104" height="3" fill="#0c4a6e"/>
+          <rect x="194" y="200" width="8" height="24" rx="2" fill="#facc15"/>
+          <rect x="190" y="186" width="16" height="18" rx="4" fill="#f59e0b"/>
+        </g>
+
+        <!-- right windows: sparkling clean -->
+        <rect x="282" y="220" width="108" height="130" rx="6" fill="#0f2f55"/>
+        <rect x="288" y="226" width="96" height="118" rx="4" fill="url(#glass)"/>
+        <polygon points="300,340 330,226 350,226 320,340" fill="#fff" opacity=".35"/>
+        <line x1="336" y1="226" x2="336" y2="344" stroke="#0f2f55" stroke-width="4"/>
+        <line x1="288" y1="285" x2="384" y2="285" stroke="#0f2f55" stroke-width="4"/>
+
+        <!-- door -->
+        <rect x="236" y="362" width="48" height="58" rx="4" fill="#0b3a6e"/>
+        <circle cx="274" cy="392" r="3" fill="#facc15"/>
+
+        <!-- sparkles -->
+        <g fill="#fff">
+          <path class="glint" d="M372 236l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+          <path class="glint d2" d="M300 300l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+          <path class="glint d3" d="M396 200l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+        </g>
+
+        <!-- water drops under big window -->
+        <g fill="#7dd3fc">
+          <ellipse class="drop" cx="164" cy="352" rx="3" ry="5"/>
+          <ellipse class="drop d2" cx="206" cy="352" rx="3" ry="5"/>
+          <ellipse class="drop d3" cx="236" cy="352" rx="3" ry="5"/>
+        </g>
+
+        <!-- paved ground -->
+        <polygon points="40,420 480,420 520,500 0,500" fill="#475569"/>
+        <g stroke="#334155" stroke-width="2">
+          <line x1="20" y1="460" x2="500" y2="460"/>
+          <line x1="110" y1="420" x2="90" y2="500"/>
+          <line x1="200" y1="420" x2="190" y2="500"/>
+          <line x1="290" y1="420" x2="290" y2="500"/>
+          <line x1="380" y1="420" x2="392" y2="500"/>
+        </g>
+        <!-- clean stripe on pavement -->
+        <polygon points="260,420 480,420 520,500 260,500" fill="#94a3b8" opacity=".55"/>
+
+        <!-- pressure washer lance + spray -->
+        <g>
+          <rect x="420" y="468" width="70" height="7" rx="3" fill="#facc15" transform="rotate(-12 420 468)"/>
+          <g fill="#bae6fd">
+            <path class="spray" d="M418 474 L360 458 L362 480 Z" opacity=".8"/>
+            <path class="spray d2" d="M418 474 L350 466 L356 488 Z" opacity=".7"/>
+            <path class="spray d3" d="M418 474 L355 450 L352 470 Z" opacity=".6"/>
+          </g>
+        </g>
+      </svg>
+    </section>
+  </main>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  (function () {
+    var box = document.getElementById('bubbles');
+    for (var i = 0; i < 18; i++) {
+      var b = document.createElement('span');
+      var s = 12 + Math.random() * 46;
+      b.className = 'bubble';
+      b.style.width = b.style.height = s + 'px';
+      b.style.left = Math.random() * 100 + '%';
+      b.style.animationDuration = 10 + Math.random() * 14 + 's';
+      b.style.animationDelay = -Math.random() * 20 + 's';
+      box.appendChild(b);
+    }
+  })();
+</script>
+</body>
+</html>

@@ -3,40 +3,58 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BelCleaning — Website in opbouw</title>
-<meta name="description" content="BelCleaning: professionele buitenreiniging. Ramen, daken, gevels en terrassen. Onze nieuwe website is binnenkort online.">
-<meta name="theme-color" content="#0b3a6e">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4C22 18 12 28 12 40a20 20 0 0 0 40 0C52 28 42 18 32 4z' fill='%2338bdf8'/%3E%3C/svg%3E">
+<title>Bel Cleaning — Website in opbouw</title>
+<meta name="description" content="Bel Cleaning: professionele buitenreiniging in België. Ramen, daken, gevels en terrassen. Onze nieuwe website is binnenkort online.">
+<meta name="theme-color" content="#0d4c94">
+<link rel="icon" type="image/png" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:title" content="Bel Cleaning — Professionele buitenreiniging">
+<meta property="og:description" content="Ramen, daken, gevels en terrassen. Onze nieuwe website is binnenkort online.">
+<meta property="og:image" content="https://belcleaning.be/assets/og-image.jpg">
+<meta property="og:url" content="https://belcleaning.be/">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --deep: #072a52;
-    --blue: #0b3a6e;
-    --sky: #38bdf8;
-    --aqua: #7dd3fc;
-    --white: #f8fbff;
-    --muted: #b9d4ee;
+    --navy: #0d4c94;
+    --blue: #1f7fd0;
+    --sky: #2ea8e0;
+    --ice: #e8f5fd;
+    --ink: #0f2742;
+    --muted: #4a6582;
+    --be-black: #1d1d1b;
+    --be-yellow: #f9d01c;
+    --be-red: #e3222d;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { background: var(--deep); }
+  html { background: #f4faff; }
   body {
     font-family: "Outfit", system-ui, sans-serif;
-    color: var(--white);
-    background: radial-gradient(1200px 700px at 80% -10%, #1e6fb8 0%, transparent 60%),
-                linear-gradient(180deg, var(--blue) 0%, var(--deep) 100%);
+    color: var(--ink);
+    background:
+      radial-gradient(900px 600px at 85% 10%, #d3ecfb 0%, transparent 65%),
+      radial-gradient(700px 500px at 0% 100%, #dff1fc 0%, transparent 60%),
+      linear-gradient(180deg, #ffffff 0%, #eef8fe 100%);
     background-attachment: fixed;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
+  /* Belgian tricolor stripe */
+  .tricolor { position: fixed; top: 0; left: 0; right: 0; height: 6px; z-index: 5; display: flex; }
+  .tricolor i { flex: 1; }
+  .tricolor i:nth-child(1) { background: var(--be-black); }
+  .tricolor i:nth-child(2) { background: var(--be-yellow); }
+  .tricolor i:nth-child(3) { background: var(--be-red); }
+
   /* Floating soap bubbles */
   .bubbles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
   .bubble {
     position: absolute; bottom: -80px; border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.75), rgba(125,211,252,.18) 40%, rgba(255,255,255,.05) 70%);
-    border: 1px solid rgba(255,255,255,.35);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(46,168,224,.18) 45%, rgba(46,168,224,.06) 70%);
+    border: 1px solid rgba(46,168,224,.35);
     animation: rise linear infinite;
   }
   @keyframes rise {
@@ -49,54 +67,51 @@
   .wrap {
     position: relative; z-index: 1;
     min-height: 100vh;
-    display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 48px;
-    max-width: 1180px; margin: 0 auto; padding: 48px 32px;
+    display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 56px;
+    max-width: 1200px; margin: 0 auto; padding: 56px 32px 40px;
   }
-
-  .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.6rem; letter-spacing: .5px; }
-  .logo svg { width: 40px; height: 40px; filter: drop-shadow(0 0 12px rgba(56,189,248,.6)); }
-  .logo span { color: var(--sky); }
 
   .badge {
     display: inline-flex; align-items: center; gap: 10px;
-    margin-top: 40px; padding: 8px 16px; border-radius: 999px;
-    background: rgba(56,189,248,.12); border: 1px solid rgba(56,189,248,.4);
-    color: var(--aqua); font-size: .9rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 8px 16px; border-radius: 999px;
+    background: #fff; border: 1px solid #bfe3f7; box-shadow: 0 4px 14px rgba(13,76,148,.08);
+    color: var(--navy); font-size: .85rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
   }
   .badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--sky); animation: pulse 1.6s ease-in-out infinite; }
-  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(56,189,248,.7); } 50% { box-shadow: 0 0 0 8px rgba(56,189,248,0); } }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(46,168,224,.7); } 50% { box-shadow: 0 0 0 8px rgba(46,168,224,0); } }
 
   h1 {
-    margin-top: 20px;
-    font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.05; font-weight: 800;
+    margin-top: 22px; color: var(--navy);
+    font-size: clamp(2.3rem, 4.8vw, 4rem); line-height: 1.06; font-weight: 800;
   }
   h1 .shine {
     white-space: nowrap;
-    background: linear-gradient(100deg, var(--sky) 20%, #ffffff 45%, var(--sky) 70%);
+    background: linear-gradient(100deg, var(--sky) 20%, #9be0ff 45%, var(--sky) 70%);
     background-size: 250% 100%;
     -webkit-background-clip: text; background-clip: text; color: transparent;
     animation: shine 4s linear infinite;
   }
   @keyframes shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
 
-  p.lead { margin-top: 20px; font-size: 1.15rem; line-height: 1.65; color: var(--muted); font-weight: 300; max-width: 520px; }
+  p.lead { margin-top: 20px; font-size: 1.15rem; line-height: 1.65; color: var(--muted); max-width: 520px; }
 
-  .progress { margin-top: 32px; max-width: 420px; }
-  .progress-label { display: flex; justify-content: space-between; font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
-  .bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,.1); overflow: hidden; }
+  .progress { margin-top: 30px; max-width: 420px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .85rem; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+  .bar { height: 8px; border-radius: 99px; background: #d9ecf8; overflow: hidden; }
   .bar b {
     display: block; height: 100%; width: 78%; border-radius: inherit;
-    background: linear-gradient(90deg, var(--sky), #a5f3fc, var(--sky)); background-size: 200% 100%;
-    animation: fill 2.4s cubic-bezier(.2,.8,.2,1) both, flow 2s linear infinite;
+    background: linear-gradient(90deg, var(--blue), var(--sky), #8fd8fb, var(--sky), var(--blue)); background-size: 200% 100%;
+    animation: fill 2.4s cubic-bezier(.2,.8,.2,1) both, flow 2.5s linear infinite;
   }
   @keyframes fill { from { width: 0; } }
   @keyframes flow { to { background-position: -200% 0; } }
 
-  .services { margin-top: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 520px; }
+  .services { margin-top: 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 520px; }
   .service {
     display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px;
-    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-    backdrop-filter: blur(6px); font-weight: 600;
+    background: rgba(255,255,255,.85); border: 1px solid #d4ebf9;
+    box-shadow: 0 6px 18px rgba(13,76,148,.07);
+    font-weight: 600; color: var(--ink);
     opacity: 0; transform: translateY(14px); animation: up .7s ease forwards;
   }
   .service:nth-child(1) { animation-delay: .3s; }
@@ -104,56 +119,47 @@
   .service:nth-child(3) { animation-delay: .6s; }
   .service:nth-child(4) { animation-delay: .75s; }
   @keyframes up { to { opacity: 1; transform: none; } }
-  .service svg { flex: none; width: 28px; height: 28px; color: var(--sky); }
+  .service svg { flex: none; width: 28px; height: 28px; color: var(--blue); }
 
-  footer { margin-top: 44px; font-size: .9rem; color: var(--muted); }
-  footer a { color: var(--aqua); text-decoration: none; }
+  footer { margin-top: 40px; font-size: .9rem; color: var(--muted); }
+  footer a { color: var(--blue); text-decoration: none; font-weight: 600; }
 
-  /* Scene */
-  .scene { width: 100%; max-width: 520px; justify-self: center; }
-  .scene svg { width: 100%; height: auto; display: block; overflow: visible; }
-
-  .squeegee { animation: wipe 5s ease-in-out infinite; }
-  @keyframes wipe {
-    0%   { transform: translate(0, 0); }
-    45%  { transform: translate(0, 118px); }
-    50%  { transform: translate(0, 118px); }
-    95%  { transform: translate(0, 0); }
-    100% { transform: translate(0, 0); }
+  /* Logo stage */
+  .stage { position: relative; width: 100%; max-width: 560px; justify-self: center; }
+  .halo {
+    position: absolute; inset: 6% 4% 22%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,168,224,.25), rgba(46,168,224,0) 70%);
+    animation: breathe 5s ease-in-out infinite;
   }
-  .clean-reveal { animation: reveal 5s ease-in-out infinite; }
-  @keyframes reveal {
-    0%   { height: 0; }
-    45%  { height: 118px; }
-    80%  { height: 118px; }
-    95%  { height: 0; }
-    100% { height: 0; }
+  @keyframes breathe { 0%,100% { transform: scale(.94); opacity: .7; } 50% { transform: scale(1.05); opacity: 1; } }
+  .logo-box { position: relative; animation: float 6s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .logo-box img { display: block; width: 100%; height: auto; filter: drop-shadow(0 18px 30px rgba(13,76,148,.18)); }
+
+  /* light sweep clipped to the logo shape */
+  .sweep {
+    position: absolute; inset: 0; pointer-events: none;
+    -webkit-mask: url(assets/logo-640.webp) center / 100% 100% no-repeat;
+            mask: url(assets/logo-640.webp) center / 100% 100% no-repeat;
+    background: linear-gradient(110deg, transparent 44%, rgba(255,255,255,.55) 50%, transparent 56%);
+    background-size: 300% 100%;
+    background-position: 0 0;
+    animation: sweep 5s ease-in-out infinite;
   }
-  .glint { animation: glint 3.5s ease-in-out infinite; }
-  .glint.d2 { animation-delay: 1.2s; }
-  .glint.d3 { animation-delay: 2.3s; }
-  @keyframes glint { 0%,100% { opacity: 0; transform: scale(.4); } 50% { opacity: 1; transform: scale(1); } }
-  .glint { transform-box: fill-box; transform-origin: center; }
+  @keyframes sweep { 0% { background-position: 0 0; } 45%,100% { background-position: 100% 0; } }
 
-  .drop { animation: drip 2.2s ease-in infinite; }
-  .drop.d2 { animation-delay: .7s; }
-  .drop.d3 { animation-delay: 1.4s; }
-  @keyframes drip { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(70px); opacity: 0; } }
-
-  .spray { animation: spray .9s ease-out infinite; transform-box: fill-box; transform-origin: left center; }
-  .spray.d2 { animation-delay: .3s; }
-  .spray.d3 { animation-delay: .6s; }
-  @keyframes spray { 0% { opacity: 0; transform: scaleX(.2); } 40% { opacity: .9; } 100% { opacity: 0; transform: scaleX(1); } }
-
-  .cloud { animation: drift 30s linear infinite; }
-  .cloud.c2 { animation-duration: 45s; animation-delay: -15s; }
-  @keyframes drift { from { transform: translateX(-140px); } to { transform: translateX(620px); } }
+  .twinkle { position: absolute; width: 9%; aspect-ratio: 1; transform: translate(-50%, -50%) scale(0); animation: twinkle 3s ease-in-out infinite; }
+  .twinkle svg { width: 100%; height: 100%; display: block; }
+  .twinkle.t1 { left: 79%; top: 15%; }
+  .twinkle.t2 { left: 88%; top: 24.5%; width: 6%; animation-delay: .9s; }
+  .twinkle.t3 { left: 45%; top: 39%; width: 6%; animation-delay: 1.8s; }
+  .twinkle.t4 { left: 55%; top: 50%; width: 4.5%; animation-delay: 2.4s; }
+  @keyframes twinkle { 0%,100% { transform: translate(-50%,-50%) scale(0) rotate(0); opacity: 0; } 45% { transform: translate(-50%,-50%) scale(1) rotate(45deg); opacity: 1; } 70% { opacity: 0; } }
 
   @media (max-width: 900px) {
-    .wrap { grid-template-columns: 1fr; gap: 24px; padding: 32px 16px; text-align: center; }
-    .scene { order: -1; max-width: 360px; }
+    .wrap { grid-template-columns: 1fr; gap: 20px; padding: 36px 16px 32px; text-align: center; }
+    .stage { order: -1; max-width: 380px; }
     .text { display: flex; flex-direction: column; align-items: center; }
-    .badge { margin-top: 24px; }
     .progress { width: 100%; }
     .services { width: 100%; text-align: left; }
   }
@@ -162,25 +168,18 @@
 </style>
 </head>
 <body>
+  <div class="tricolor" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="bubbles" id="bubbles" aria-hidden="true"></div>
 
   <main class="wrap">
     <section class="text">
-      <div class="logo">
-        <svg viewBox="0 0 64 64" aria-hidden="true">
-          <path d="M32 4C22 18 12 28 12 40a20 20 0 0 0 40 0C52 28 42 18 32 4z" fill="#38bdf8"/>
-          <path d="M22 40a10 10 0 0 0 10 10" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>
-        </svg>
-        <div>Bel<span>Cleaning</span></div>
-      </div>
-
       <div class="badge"><i></i> Website in opbouw</div>
 
       <h1>We poetsen onze<br>website <span class="shine">blinkend op</span></h1>
 
       <p class="lead">
         Net zoals uw ramen en gevels verdient ook onze website een grondige beurt.
-        Binnenkort vindt u hier alles over onze professionele buitenreiniging.
+        Binnenkort vindt u hier alles over onze professionele buitenreiniging in heel België.
       </p>
 
       <div class="progress" aria-label="Voortgang">
@@ -207,129 +206,19 @@
         </div>
       </div>
 
-      <footer>&copy; <span id="year">2026</span> BelCleaning &middot; <a href="https://belcleaning.be">belcleaning.be</a></footer>
+      <footer>&copy; <span id="year">2026</span> Bel Cleaning &middot; <a href="https://belcleaning.be">belcleaning.be</a></footer>
     </section>
 
-    <section class="scene" aria-hidden="true">
-      <svg viewBox="0 0 520 520">
-        <defs>
-          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#bae6fd"/>
-            <stop offset="1" stop-color="#38bdf8"/>
-          </linearGradient>
-          <linearGradient id="dirty" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#8a9bab"/>
-            <stop offset="1" stop-color="#6b7c8c"/>
-          </linearGradient>
-          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#f1f5f9"/>
-            <stop offset="1" stop-color="#cbd5e1"/>
-          </linearGradient>
-          <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#1e3a5f"/>
-            <stop offset="1" stop-color="#14304f"/>
-          </linearGradient>
-          <clipPath id="bigWin"><rect x="150" y="226" width="96" height="118" rx="4"/></clipPath>
-        </defs>
-
-        <!-- sun glow + clouds -->
-        <circle cx="420" cy="90" r="46" fill="#fde68a" opacity=".9"/>
-        <circle cx="420" cy="90" r="80" fill="#fde68a" opacity=".12"/>
-        <g class="cloud" opacity=".85">
-          <ellipse cx="60" cy="70" rx="44" ry="16" fill="#fff"/>
-          <ellipse cx="88" cy="60" rx="30" ry="18" fill="#fff"/>
-        </g>
-        <g class="cloud c2" opacity=".6">
-          <ellipse cx="40" cy="140" rx="34" ry="12" fill="#fff"/>
-          <ellipse cx="62" cy="132" rx="22" ry="13" fill="#fff"/>
-        </g>
-
-        <!-- house -->
-        <polygon points="90,190 260,80 430,190" fill="url(#roof)"/>
-        <g stroke="#2b5079" stroke-width="2" opacity=".7">
-          <line x1="130" y1="165" x2="390" y2="165"/>
-          <line x1="170" y1="140" x2="350" y2="140"/>
-          <line x1="210" y1="115" x2="310" y2="115"/>
-        </g>
-        <rect x="340" y="98" width="30" height="58" fill="#94a3b8"/>
-        <rect x="335" y="92" width="40" height="10" fill="#64748b"/>
-        <rect x="110" y="190" width="300" height="230" fill="url(#wall)"/>
-        <!-- brick hint -->
-        <g stroke="#cbd5e1" stroke-width="1.2">
-          <line x1="110" y1="370" x2="410" y2="370"/>
-          <line x1="110" y1="395" x2="410" y2="395"/>
-        </g>
-
-        <!-- big window: dirty, then cleaned by squeegee -->
-        <rect x="144" y="220" width="108" height="130" rx="6" fill="#0f2f55"/>
-        <rect x="150" y="226" width="96" height="118" rx="4" fill="url(#dirty)"/>
-        <g clip-path="url(#bigWin)" opacity=".5">
-          <circle cx="170" cy="250" r="6" fill="#5b6b7a"/>
-          <circle cx="215" cy="300" r="9" fill="#5b6b7a"/>
-          <circle cx="190" cy="330" r="5" fill="#5b6b7a"/>
-          <circle cx="232" cy="245" r="4" fill="#5b6b7a"/>
-        </g>
-        <g clip-path="url(#bigWin)">
-          <rect class="clean-reveal" x="150" y="226" width="96" height="0" fill="url(#glass)"/>
-        </g>
-        <line x1="198" y1="226" x2="198" y2="344" stroke="#0f2f55" stroke-width="4"/>
-        <line x1="150" y1="285" x2="246" y2="285" stroke="#0f2f55" stroke-width="4"/>
-
-        <!-- squeegee -->
-        <g class="squeegee">
-          <rect x="146" y="222" width="104" height="8" rx="3" fill="#0ea5e9"/>
-          <rect x="146" y="228" width="104" height="3" fill="#0c4a6e"/>
-          <rect x="194" y="200" width="8" height="24" rx="2" fill="#facc15"/>
-          <rect x="190" y="186" width="16" height="18" rx="4" fill="#f59e0b"/>
-        </g>
-
-        <!-- right windows: sparkling clean -->
-        <rect x="282" y="220" width="108" height="130" rx="6" fill="#0f2f55"/>
-        <rect x="288" y="226" width="96" height="118" rx="4" fill="url(#glass)"/>
-        <polygon points="300,340 330,226 350,226 320,340" fill="#fff" opacity=".35"/>
-        <line x1="336" y1="226" x2="336" y2="344" stroke="#0f2f55" stroke-width="4"/>
-        <line x1="288" y1="285" x2="384" y2="285" stroke="#0f2f55" stroke-width="4"/>
-
-        <!-- door -->
-        <rect x="236" y="362" width="48" height="58" rx="4" fill="#0b3a6e"/>
-        <circle cx="274" cy="392" r="3" fill="#facc15"/>
-
-        <!-- sparkles -->
-        <g fill="#fff">
-          <path class="glint" d="M372 236l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
-          <path class="glint d2" d="M300 300l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
-          <path class="glint d3" d="M396 200l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
-        </g>
-
-        <!-- water drops under big window -->
-        <g fill="#7dd3fc">
-          <ellipse class="drop" cx="164" cy="352" rx="3" ry="5"/>
-          <ellipse class="drop d2" cx="206" cy="352" rx="3" ry="5"/>
-          <ellipse class="drop d3" cx="236" cy="352" rx="3" ry="5"/>
-        </g>
-
-        <!-- paved ground -->
-        <polygon points="40,420 480,420 520,500 0,500" fill="#475569"/>
-        <g stroke="#334155" stroke-width="2">
-          <line x1="20" y1="460" x2="500" y2="460"/>
-          <line x1="110" y1="420" x2="90" y2="500"/>
-          <line x1="200" y1="420" x2="190" y2="500"/>
-          <line x1="290" y1="420" x2="290" y2="500"/>
-          <line x1="380" y1="420" x2="392" y2="500"/>
-        </g>
-        <!-- clean stripe on pavement -->
-        <polygon points="260,420 480,420 520,500 260,500" fill="#94a3b8" opacity=".55"/>
-
-        <!-- pressure washer lance + spray -->
-        <g>
-          <rect x="420" y="468" width="70" height="7" rx="3" fill="#facc15" transform="rotate(-12 420 468)"/>
-          <g fill="#bae6fd">
-            <path class="spray" d="M418 474 L360 458 L362 480 Z" opacity=".8"/>
-            <path class="spray d2" d="M418 474 L350 466 L356 488 Z" opacity=".7"/>
-            <path class="spray d3" d="M418 474 L355 450 L352 470 Z" opacity=".6"/>
-          </g>
-        </g>
-      </svg>
+    <section class="stage">
+      <div class="halo" aria-hidden="true"></div>
+      <div class="logo-box">
+        <img src="assets/logo-1100.webp" srcset="assets/logo-640.webp 640w, assets/logo-1100.webp 1100w" sizes="(max-width: 900px) 380px, 560px" width="1100" height="1000" alt="Bel Cleaning — Professionele buitenreiniging | België">
+        <div class="sweep" aria-hidden="true"></div>
+        <span class="twinkle t1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z" fill="#fff"/></svg></span>
+        <span class="twinkle t2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z" fill="#fff"/></svg></span>
+        <span class="twinkle t3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z" fill="#fff"/></svg></span>
+        <span class="twinkle t4" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z" fill="#fff"/></svg></span>
+      </div>
     </section>
   </main>
 
